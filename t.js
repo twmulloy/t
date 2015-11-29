@@ -11,7 +11,7 @@ window[ns] = (function(ns, p) {
       is: function(obj) {
         var type = Object.prototype.toString.call(obj);
         type = type.substr(8, type.length - 9).toLowerCase();
-        switch(type){
+        switch (type) {
           case 'htmlcollection':
             type = 'array';
           default:
@@ -24,10 +24,8 @@ window[ns] = (function(ns, p) {
 
   // Type Lookup Table
   lookup = {
-    array: function(){
-      p.each = function() {
-        console.log('sup');
-      }
+    array: function() {
+
     },
     string: function() {
       p.elements = q.call(this);
@@ -36,32 +34,44 @@ window[ns] = (function(ns, p) {
 
   function is(input) {
 
-    // console.log('is', this);
+    var _type;
 
-    var _t = what.type.is(input);
+    if (!input && this.hasOwnProperty(ns) && this.hasOwnProperty('object')) {
+      input = this.object;
+    }
+
+    _type = what.type.is(input);
+
     return {
-      type: function(t) {
-        return t ? _t === t : _t;
+      type: function(type) {
+        return type ? _type === type : _type;
       },
       empty: function() {
-        return (!input || 0 === input.length);
-      },
+        return empty.call(this, input);
+      }(),
       blank: function() {
-        return (!input || /^\s*$/.test(input));
-      }
-    };
+        return blank.call(this, input);
+      }()
+    }
+  }
+
+  function blank(input) {
+    return (!input || /^\s*$/.test(input));
+  }
+
+  function empty(input) {
+    return (!input || /^\s*$/.test(input) || Object.keys(input).length === 0);
   }
 
   function q() {
     var selector, match;
     var element, elements = [];
-
-    each.call(this.split(','), function(i){
+    each.call(this.split(','), function(i) {
       selector = this.trim();
       match = selector.match(/^(#|.)?[a-zA-Z][\w:.-]*$/);
-      if(match && match[0]){
+      if (match && match[0]) {
         selector = match[0];
-        switch(match[1]){
+        switch (match[1]) {
           case '#':
             element = document.getElementById(selector.replace(match[1], ''));
             break;
@@ -72,18 +82,18 @@ window[ns] = (function(ns, p) {
             element = document.getElementsByTagName(selector);
             break;
         }
-      }else{
+      } else {
         element = document.querySelector(selector);
       }
 
-      if(element) {
-        if(is(element).type('array')) {
-          if(element.length > 0){
-            each.call(element, function(i){
+      if (element) {
+        if (is(element).type('array')) {
+          if (element.length > 0) {
+            each.call(element, function(i) {
               elements.push(this);
             });
           }
-        }else {
+        } else {
           elements.push(element);
         }
       }
@@ -107,42 +117,69 @@ window[ns] = (function(ns, p) {
     return obj;
   }
 
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
+
   function 〱each_arr(fn) {
     var l = this.length;
     var i = 0;
     while (l--) {
       fn.call(this[l], i);
-      i+=1;
+      i += 1;
     }
   }
 
   function each(fn) {
-
-
-    if(!is(fn).type('function')){
+    if (!is(fn).type('function')) {
       return;
     }
 
-    // t object
-    if(this.hasOwnProperty(ns)){
-      console.log('t element iterate');
-    }else if(is(this).type('array')){
+    // `ns` object
+    if (this.hasOwnProperty(ns)) {
+      if (this.hasOwnProperty('elements') && is(this.elements).type('array') && !is(this.elements).empty()) {
+        if (this.elements.length > 1) {
+          〱each_arr.call(this.elements, fn);
+        } else {
+          fn.call(this.elements[0]);
+        }
+      }
+    } else if (is(this).type('array')) {
       〱each_arr.call(this, fn);
     }
   }
 
-  p[ns] = (function(){
+  p[ns] = (function() {
     return merge(p, {
+      each: each,
+      empty: empty,
+      guid: guid,
       is: is,
-      each: each
+      merge: merge,
+      what: what
     });
   })();
 
   Object.prototype[ns] = function() {
+
+    var ist = this.hasOwnProperty(ns);
+
+    if (!ist) {
+      p.id = guid();
+    }
+
+    p.elements = [];
+    p.object = this;
     p.type = what.type.is(this);
-    if(is(lookup[p.type]).type('function')){
+
+
+    if (is(lookup[p.type]).type('function')) {
       lookup[p.type].call(this);
     }
+
     return merge(p, p[ns]);
   }
 
