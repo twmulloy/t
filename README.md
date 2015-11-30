@@ -7,7 +7,7 @@ Include the `script`.
 ```
 
 ## DOM
-To query elements, simply create a string with a selector or comma delimit multiple selectors.
+To query elements, simply create a string with a selector or comma delimited multiple selectors.
 ```
 var dom = "html, body".t();
 ```
@@ -25,7 +25,7 @@ var dom = "html, body".t();
 ".my-class".t(); // `getElementsByClassName`
 ```
 
-The `t()` string method returns the element nodes (if they exist) along with some helpful utility functions.
+The `t()` string method returns the element nodes contained within the `elements` namespace (if they exist), along with some helpful utility functions.
 
 
 ## Utils
