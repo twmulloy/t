@@ -25,6 +25,8 @@ Checklist of features that will complete the base of the `t` javascript framewor
 - [ ] Image sequencer and scrubber
 - [ ] XHR
 - [ ] Retina asset loader
+- [ ] Breakpoints
+- [ ] Responsive images
 
 ## Usage
 Include the `script`.
