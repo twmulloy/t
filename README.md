@@ -57,10 +57,9 @@ Utility functions can be called from the `t()` result object or from the global 
     console.log(this); // -> Number
   });
 </script>
-
 ```
 
-### Data type
+### Data Type
 Check for generic data types: `number`, `string`, `array`, `object` and more!
 ```
 t.what.type.is(0);   
@@ -69,7 +68,7 @@ t.what.type.is(0);
 t.what.type.is(1.0);
 // -> "number"
 
-t.what.type.is("hello");
+t.what.type.is('hello');
 // -> "string"
 
 t.what.type.is(this);
@@ -93,7 +92,7 @@ t.is(0).type();
 t.is(1.0).type();
 // -> "number"
 
-t.is("hello").type();
+t.is('hello').type();
 // -> "string"
 
 t.is(this).type();
@@ -107,4 +106,15 @@ t.is().type();
 
 t.is([]).type();
 // -> "array"
+```
+The above `t.is()` belt syntax is meant for `type` checking.
+```
+if(t.is('hello').type('string')){
+  console.log("process string...");
+}
+
+// Using `this` reads pretty well
+if(t.is(this).type('array')){
+  console.log("%c \"We are dealing with an array.\"", "font-style: italic;", "- t");
+}
 ```
