@@ -6,7 +6,7 @@ Include the `script`.
 <script src='t.js'></script>
 ```
 
-## DOM
+### DOM
 To query elements, simply create a string with a selector or comma delimited multiple selectors.
 ```
 var dom = "html, body".t();
@@ -28,7 +28,7 @@ var dom = "html, body".t();
 The `t()` string method returns the element nodes contained within the `elements` namespace (if they exist), along with some helpful utility functions.
 
 
-## Utils
+### Utils
 Utility functions can be called from the `t()` result object or from the global `t` object.
 
 ```
@@ -118,6 +118,10 @@ if(t.is(this).type('array')){
   console.log("%c \"We are dealing with an array.\"", "font-style: italic;", "- t");
 }
 ```
+
+## Funcs
+
+### t
 
 #### blank
 
