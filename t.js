@@ -36,7 +36,7 @@ window[ns] = (function(ns, p) {
 
     var _type;
 
-    if (!input && this.hasOwnProperty(ns) && this.hasOwnProperty('object')) {
+    if (!input && this && this.hasOwnProperty(ns) && this.hasOwnProperty('object')) {
       input = this.object;
     }
 
@@ -133,22 +133,43 @@ window[ns] = (function(ns, p) {
     }
   }
 
+  function 〱each_item(fn, prop) {
+    if (this.hasOwnProperty(prop) && is(this[prop]).type('array') && !is(this[prop]).empty) {
+      if (this[prop].length > 1) {
+        〱each_arr.call(this[prop], fn);
+      } else {
+        fn.call(this[prop][0]);
+      }
+    }
+  }
+
   function each(fn) {
-    if (!is(fn).type('function')) {
+    if(is(arguments[0]).type('function')){
+      fn = arguments[0];
+    }else if(is(arguments[1]).type('function')){
+      fn = arguments[1];
+    }
+
+    if(!fn){
       return;
     }
 
     // `ns` object
     if (this.hasOwnProperty(ns)) {
-      if (this.hasOwnProperty('elements') && is(this.elements).type('array') && !is(this.elements).empty()) {
-        if (this.elements.length > 1) {
-          〱each_arr.call(this.elements, fn);
-        } else {
-          fn.call(this.elements[0]);
+      if (this.hasOwnProperty('type')) {
+        switch (this.type) {
+          case 'string':
+            〱each_item.call(this, fn, 'elements');
+            break;
+          case 'array':
+            〱each_item.call(this, fn, 'object');
+            break;
         }
       }
     } else if (is(this).type('array')) {
       〱each_arr.call(this, fn);
+    } else {
+      〱each_arr.call(arguments[0], fn);
     }
   }
 
@@ -164,22 +185,21 @@ window[ns] = (function(ns, p) {
   })();
 
   Object.prototype[ns] = function() {
-
     var ist = this.hasOwnProperty(ns);
 
     if (!ist) {
       p.id = guid();
     }
-
-    p.elements = [];
     p.object = this;
     p.type = what.type.is(this);
 
+    if (p.hasOwnProperty('elements')) {
+      delete p.elements;
+    }
 
     if (is(lookup[p.type]).type('function')) {
       lookup[p.type].call(this);
     }
-
     return merge(p, p[ns]);
   }
 
