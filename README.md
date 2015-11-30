@@ -1,5 +1,26 @@
 # t.js
-`t` is a javascript framework.
+`t` is a javascript framework for myself that includes the most common components asked for by clients.
+
+## Features
+Checklist of features that will complete the base of the `t` javascript framework.
+- [x] DOM selectors
+- [ ] Utilities
+  - [x] Merge
+  - [x] Deep merge
+  - [x] Empty?
+  - [x] Blank?
+  - [x] GUID
+  - [x] Type?
+  - [x] Each
+  - [ ] Delay
+- [ ] Extension authoring
+- [ ] Templates
+- [ ] WebComponent loader
+- [ ] Two-way data bind
+- [ ] CSS animation tween
+- [ ] Client-side router 
+- [ ] Image sequencer and scrubber
+- [ ] XHR
 
 ## Usage
 Include the `script`.
