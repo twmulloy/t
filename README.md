@@ -48,8 +48,6 @@ Utility functions can be called from the `t()` result object or from the global 
     console.log(this); // -> <li></li>
   });
 
-  // Or
-
   "li".t().each(function(){
     console.log(this); // -> <li></li>
   });
