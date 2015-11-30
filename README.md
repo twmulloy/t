@@ -1,9 +1,12 @@
 # t.js
-`t` is a javascript framework for myself that includes the most common components asked for by clients, in a syntax that reads a little better than native javascript.
+`t` is a javascript framework for myself that includes the most common components asked for by clients, in (hopefully) a syntax that reads a little better than native javascript.
 
 ## Features
 Checklist of features that will complete the base of the `t` javascript framework.
-- [x] DOM selectors
+- [ ] DOM
+  - [ ] Choose best query selector
+  - [x] Each
+  - [ ] Misc. traversing methods
 - [ ] Utilities
   - [x] Merge
   - [x] Deep merge
@@ -21,6 +24,7 @@ Checklist of features that will complete the base of the `t` javascript framewor
 - [ ] Client-side router 
 - [ ] Image sequencer and scrubber
 - [ ] XHR
+- [ ] Retina asset loader
 
 ## Usage
 Include the `script`.
@@ -141,7 +145,7 @@ if(t.is(this).type('array')){
 }
 ```
 
-## Funcs
+## Functions
 
 ### t
 

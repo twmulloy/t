@@ -69,6 +69,7 @@ window[ns] = (function(ns, p) {
     each.call(this.split(','), function(i) {
       selector = this.trim();
       match = selector.match(/^(#|.)?[a-zA-Z][\w:.-]*$/);
+      // Direct selector (no traversing from ancestor node)
       if (match && match[0]) {
         selector = match[0];
         switch (match[1]) {
@@ -83,6 +84,8 @@ window[ns] = (function(ns, p) {
             break;
         }
       } else {
+        // TODO... determine if need to use `querySelector` or `querySelectorAll` as last resort
+        //         traverse from ancestor node
         element = document.querySelector(selector);
       }
 
