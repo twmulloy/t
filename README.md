@@ -43,7 +43,7 @@ items.each(function(){
 "li".t().each(function(){
   console.log(this); // -> <li></li>
 });
-```
+
 // `t` object
 t.each([1, 2, 3], function(){
   console.log(this); // -> Number
