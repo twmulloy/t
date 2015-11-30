@@ -32,22 +32,33 @@ The `t()` string method returns the element nodes contained within the `elements
 Utility functions can be called from the `t()` result object or from the global `t` object.
 
 ```
-// `t()` result object
-var items = "li".t();
-items.each(function(){
-  console.log(this); // -> <li></li>
-});
+<!doctype html>
+<meta charset='utf-8'>
 
-// Or
+<ol>
+  <li></li>
+  <li></li>
+  <li></li>
+</ol>
 
-"li".t().each(function(){
-  console.log(this); // -> <li></li>
-});
+<script>
+  // `t()` result object
+  var items = "li".t();
+  items.each(function(){
+    console.log(this); // -> <li></li>
+  });
 
-// `t` object
-t.each([1, 2, 3], function(){
-  console.log(this); // -> Number
-});
+  // Or
+
+  "li".t().each(function(){
+    console.log(this); // -> <li></li>
+  });
+
+  // `t` object
+  t.each([1, 2, 3], function(){
+    console.log(this); // -> Number
+  });
+</script>
 
 ```
 
