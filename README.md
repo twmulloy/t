@@ -118,3 +118,17 @@ if(t.is(this).type('array')){
   console.log("%c \"We are dealing with an array.\"", "font-style: italic;", "- t");
 }
 ```
+
+#### blank
+
+#### each
+
+#### empty
+
+#### guid
+
+#### is
+
+#### merge
+
+#### what

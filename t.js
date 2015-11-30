@@ -144,13 +144,13 @@ window[ns] = (function(ns, p) {
   }
 
   function each(fn) {
-    if(is(arguments[0]).type('function')){
+    if (is(arguments[0]).type('function')) {
       fn = arguments[0];
-    }else if(is(arguments[1]).type('function')){
+    } else if (is(arguments[1]).type('function')) {
       fn = arguments[1];
     }
 
-    if(!fn){
+    if (!fn) {
       return;
     }
 
@@ -175,6 +175,7 @@ window[ns] = (function(ns, p) {
 
   p[ns] = (function() {
     return merge(p, {
+      blank: blank,
       each: each,
       empty: empty,
       guid: guid,
