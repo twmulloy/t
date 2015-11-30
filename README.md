@@ -1,5 +1,5 @@
 # t.js
-`t` is a javascript framework for myself that includes the most common components asked for by clients.
+`t` is a javascript framework for myself that includes the most common components asked for by clients, in a syntax that reads a little better than native javascript.
 
 ## Features
 Checklist of features that will complete the base of the `t` javascript framework.
