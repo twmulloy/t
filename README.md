@@ -1,4 +1,5 @@
 # t.js
+`t` is a javascript framework.
 
 ## Usage
 Include the `script`.
@@ -59,8 +60,8 @@ Utility functions can be called from the `t()` result object or from the global 
 </script>
 ```
 
-### Data Type
-Check for generic data types: `number`, `string`, `array`, `object` and more!
+### Data Types
+Check for generic data types: `number`, `string`, `array`, `object`, `undefined`, `global` and more!
 ```
 t.what.type.is(0);   
 // -> "number"
